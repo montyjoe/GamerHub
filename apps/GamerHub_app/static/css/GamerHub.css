@@ -1,0 +1,25 @@
+* {
+
+}
+
+.header {
+  outline: 2px dotted red;
+  height: 100px;
+  width: auto;
+  margin: 0px 0px 0px 0px;
+}
+
+.body {
+  outline: 2px dotted red;
+  min-height: 600px;
+  width: auto;
+  margin: 10px 0px 0px 0px;
+}
+
+.footer {
+  outline: 2px dotted red;
+  height: 75px;
+  width: auto;
+  margin: 0px 0px 0px 0px;
+  text-align: center;
+}
