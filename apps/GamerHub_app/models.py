@@ -96,3 +96,18 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class Profile(models.Model):
+    platform = models.CharField(max_length=100, blank=True)
+    availability = models.CharField(max_length=100, blank=True)
+    gamer_type = models.CharField(max_length=100, blank=True)
+    user_id = models.ForeignKey(User, related_name='profile')
+
+class ProPicture(models.Model):
+    picture = models.ImageField(upload_to='documents/', blank=True)
+    user_id = models.ForeignKey(User, related_name='profilePic')
+
+class GameList(models.Model):
+    name = models.CharField(max_length=200)
+    picture_path = models.CharField(max_length=100, blank=True)
+    user_id = models.ForeignKey(User, related_name='game')
