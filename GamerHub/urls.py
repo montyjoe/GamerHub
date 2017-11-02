@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin.mlkjfla;sjfdowuo/', admin.site.urls), #Admin Page
+    url(r'^admin/', admin.site.urls), #Admin Page
     url(r'^', include('apps.GamerHub_app.urls')) #Routes to first_app/urls.py
 ]

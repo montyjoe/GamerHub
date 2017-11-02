@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+    <title></title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'User_app/css/login.css'%}">
+    <script type="text/javascript" src="{% static 'User_app/js/login.js'%}"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="center register" id="register">
+        <h1>Register</h1>
+        {% if messages %}
+        <div class="errors">
+          <div onclick="closeErrors()" class="close-button-form" >
+          </div>
+          <!-- <ul class="messages"> -->
+          <h2>Error:</h2>
+            {% for message in messages %}
+            <p{% if message.tags %} class="message"{% endif %}>{{ message }}</p>
+            {% endfor %}
+          <!-- </ul> -->
+        </div>
+        {% else %}
+
+          {% endif %}
+
+          <!-- User registration form  -->
+          <form class="register-form" action="/register_account" method="POST">
+            {% csrf_token %}
+            <p>First Name:</p>
+            <input class="input-field" type="text" name="first_name">
+            <p>Gamer Tag:</p>
+            <input class="input-field" type="text" name="gamer_tag">
+            <p>Last Name:</p>
+            <input class="input-field" type="text" name="last_name">
+            <p>Email:</p>
+            <input class="input-field" type="email" name="email">
+            <p>Password:</p>
+            <input class="input-field" type="password" name="password">
+            <p>Confirm Password:</p>
+            <input class="input-field" type="password" name="confirm"><br>
+            <div class="button-holder">
+
+              <a class="register-link" href="/login">Login</a>
+              <input class="login-button" type="submit" name="submit" value="register">
+            </div>
+
+
+          </form>
+
+        </div>
+
+    </div>
+  </body>
+</html>
