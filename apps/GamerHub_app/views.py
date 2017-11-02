@@ -85,8 +85,12 @@ def editProfilePicture(request):
 def createProfile(request):
     if request.method == 'POST':
         profile = Profile.objects.create(
-            platform = request.POST['platform'],
-            availability = request.POST['availability'],
+            platform1 = request.POST['platform1'],
+            platform2 = request.POST['platform2'],
+            platform3 = request.POST['platform3'],
+            ava1 = request.POST['ava1'],
+            ava2 = request.POST['ava2'],
+            ava3 = request.POST['ava3'],
             gamer_type = request.POST['gamer_type'],
             user_id = User.objects.get(id = request.session['user']),
         )
@@ -96,11 +100,19 @@ def createProfile(request):
 def editProfile(request):
     if request.method == 'POST':
         profile = Profile.objects.get(user_id = User.objects.get(id = request.session['user']))
-        platform = request.POST['platform']
-        availability = request.POST['availability']
+        platform1 = request.POST['platform1']
+        platform2 = request.POST['platform2']
+        platform3 = request.POST['platform3']
+        ava1 = request.POST['ava1']
+        ava2 = request.POST['ava2']
+        ava3 = request.POST['ava3']
         gamer_type = request.POST['gamer_type']
-        profile.platform = platform
-        profile.availability = availability
+        profile.platform1 = platform1
+        profile.platform2 = platform2
+        profile.platform3 = platform3
+        profile.ava1 = ava1
+        profile.ava2 = ava2
+        profile.ava3 = ava3
         profile.gamer_type = gamer_type
         profile.save()
         return redirect('/profile')
