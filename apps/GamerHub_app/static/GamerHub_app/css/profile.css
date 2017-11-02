@@ -369,10 +369,11 @@ div.panel {
   border-radius : 20px;
   background-color : #3F5EFB;
   color: white;
-  margin-right: -50%;
+  /*margin-right: -50%;*/
   display : inline-block;
   position: absolute;
   bottom: 0;
+  right: 9%;
   margin-bottom: 20px;
   line-height: 25px;
   font-size: 1em;
@@ -383,11 +384,12 @@ div.panel {
   border-radius : 20px;
   background-color : #3F5EFB;
   color: white;
-  margin-right: -50%;
+  /*margin-right: -50%;*/
   display : inline-block;
   position: absolute;
   font-size: .8em;
   bottom: 0;
+  right: 9%;
   line-height: 25px;
   vertical-align: middle;
   margin-bottom: 20px;

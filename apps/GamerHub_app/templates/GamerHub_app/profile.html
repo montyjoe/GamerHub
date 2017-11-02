@@ -79,9 +79,40 @@
             <form class="profile-form" action="/editProfile" method="post">
 
               {% csrf_token %}
-              <input type="text" name="platform" value="{{item.platform}}">
-              <input type="text" name="availability" value="{{item.availability}}">
-              <input type="text" name="gamer_type" value="{{item.gamer_type}}">
+              <!-- <select name="platform">
+                <option value="PC">PC</option>
+                <option value="Playstation">Playstation</option>
+                <option value="Xbox">XBox</option>
+              </select> -->
+              <h4>Choose your favorite platforms:</h4>
+              <label for="platform1">PC</label>
+              <input type="hidden" name="platform1" value="none">
+              <input type="checkbox" name="platform1" value="PC">
+              <label for="platform2">Playstation</label>
+              <input type="hidden" name="platform2" value="none">
+              <input type="checkbox" name="platform2" value="Playstation">
+              <label for="platform3">Xbox</label>
+              <input type="hidden" name="platform3" value="none">
+              <input type="checkbox" name="platform3" value="Xbox"><br><br>
+              <!-- <input type="text" name="platform" value="{{item.platform}}"> -->
+              <h4>Choose your availability:</h4>
+              <label for="ava1">Mornings 6am-12pm</label>
+              <input type="hidden" name="ava1" value="none">
+              <input type="checkbox" name="ava1" value="Mornings 6am-12pm"><br>
+              <label for="ava2">Afternoons 12pm-6pm</label>
+              <input type="hidden" name="ava2" value="none">
+              <input type="checkbox" name="ava2" value="Afternoons 12pm-6pm"><br>
+              <label for="ava3">Nights 6pm-12am+</label>
+              <input type="hidden" name="ava3" value="none">
+              <input type="checkbox" name="ava3" value="Nights 6pm-12am+">
+              <!-- <input type="text" name="availability" value="{{item.availability}}"> -->
+              <h4>Choose your play style:</h4>
+              <select name="gamer_type">
+                <option value="Casual Gamer">Casual Gamer</option>
+                <option value="Looking for some Competition">Looking for some Competition</option>
+                <option value="Serious Gamer">Serious Gamer</option>
+              </select>
+              <!-- <input type="text" name="gamer_type" value="{{item.gamer_type}}"> -->
               <input id="edit" type="submit" name="" value="Save Changes">
 
             </form>
@@ -89,8 +120,28 @@
           </div>
           <div class="contact-info">
 
-            <h4>Platform:<p> {{item.platform}}</p></h4>
-            <h4>Availability:<p> {{item.availability}}</p></h4>
+            <h4>Platform(s):<p>
+              {% if item.platform1 != 'none' %}
+              {{item.platform1}}
+              {% endif %}
+              {% if item.platform2 != 'none' %}
+               {{item.platform2}}
+               {% endif %}
+              {% if item.platform3 != 'none' %}
+               {{item.platform3}}
+               {% endif %}
+            </p></h4>
+            <h4>Availability:<p>
+              {% if item.ava1 != 'none' %}
+              {{item.ava1}}
+              {% endif %}
+              {% if item.ava2 != 'none' %}
+               {{item.ava2}}
+               {% endif %}
+              {% if item.ava3 != 'none' %}
+               {{item.ava3}}
+               {% endif %}
+             </p></h4>
             <h4>Gamer Type:<p> {{item.gamer_type}}</p></h4>
 
           </div>
@@ -102,9 +153,35 @@
             <form class="profile-form" action="/createProfile" method="post">
 
               {% csrf_token %}
-              <input type="text" name="platform" value="" placeholder="Platform">
-              <input type="text" name="availability" value="" placeholder="Availability">
-              <input type="text" name="gamer_type" value="" placeholder="Gamer Type">
+              <h4>Choose your favorite platforms:</h4>
+              <label for="platform1">PC</label>
+              <input type="hidden" name="platform1" value="none">
+              <input type="checkbox" name="platform1" value="PC">
+              <label for="platform2">Playstation</label>
+              <input type="hidden" name="platform2" value="none">
+              <input type="checkbox" name="platform2" value="Playstation">
+              <label for="platform3">Xbox</label>
+              <input type="hidden" name="platform3" value="none">
+              <input type="checkbox" name="platform3" value="Xbox"><br><br>
+              <!-- <input type="text" name="platform" value="{{item.platform}}"> -->
+              <h4>Choose your availability:</h4>
+              <label for="ava1">Mornings 6am-12pm</label>
+              <input type="hidden" name="ava1" value="none">
+              <input type="checkbox" name="ava1" value="Mornings 6am-12pm"><br>
+              <label for="ava2">Afternoons 12pm-6pm</label>
+              <input type="hidden" name="ava2" value="none">
+              <input type="checkbox" name="ava2" value="Afternoons 12pm-6pm"><br>
+              <label for="ava3">Nights 6pm-12am+</label>
+              <input type="hidden" name="ava3" value="none">
+              <input type="checkbox" name="ava3" value="Nights 6pm-12am+">
+              <!-- <input type="text" name="availability" value="{{item.availability}}"> -->
+              <h4>Choose your play style:</h4>
+              <select name="gamer_type">
+                <option value="Casual Gamer">Casual Gamer</option>
+                <option value="Looking for some Competition">Looking for some Competition</option>
+                <option value="Serious Gamer">Serious Gamer</option>
+              </select>
+              <!-- <input type="text" name="gamer_type" value="" placeholder="Gamer Type"> -->
               <input id="create" type="submit" name="" value="Create">
             </form>
 

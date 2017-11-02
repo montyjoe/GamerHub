@@ -98,8 +98,12 @@ class User(models.Model):
     objects = UserManager()
 
 class Profile(models.Model):
-    platform = models.CharField(max_length=100, blank=True)
-    availability = models.CharField(max_length=100, blank=True)
+    platform1 = models.CharField(max_length=100, blank=True)
+    platform2 = models.CharField(max_length=100, blank=True)
+    platform3 = models.CharField(max_length=100, blank=True)
+    ava1 = models.CharField(max_length=100, blank=True)
+    ava2 = models.CharField(max_length=100, blank=True)
+    ava3 = models.CharField(max_length=100, blank=True)
     gamer_type = models.CharField(max_length=100, blank=True)
     user_id = models.ForeignKey(User, related_name='profile')
 
