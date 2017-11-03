@@ -4,18 +4,24 @@
     <meta charset="utf-8">
     <title>Home</title>
     {% load static %}
-    <link href="{% static 'css/GamerHub.css' %}" rel="stylesheet">
+    <!-- <link href="{% static 'css/GamerHub.css' %}" rel="stylesheet"> -->
 
   </head>
   <body>
-    <div class="header">
-      <h1>GamerHub</h1>
-    </div>
-    <div class="body">
+    <a href="/logout">Logout</a>
+    {% for user in users %}
+    <a href="/profile">{{user.gamer_tag}}</a>
 
-    </div>
-    <div class="footer">
-      <h6>&copy Ethan Prytherce</h6>
-    </div>
+    <h1>GamerHub</h1>
+    <h2>Welcome, {{user.gamer_tag}}</h2>
+    {% endfor %}
+    <div class="searchGames">
+        <form class="" action="/searchGame" method="POST">
+          {% csrf_token %}
+          Search games:
+          <input name="game">
+          <button type="submit" name="button">Search</button>
+        </form>
+      </div>
   </body>
 </html>

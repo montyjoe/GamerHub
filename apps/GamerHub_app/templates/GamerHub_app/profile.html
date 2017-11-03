@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Profile</title>
+    <meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;" />
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" /> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'GamerHub_app/css/profile.css' %}">
+    <script type="text/javascript" src="{% static 'GamerHub_app/js/profile.js'%}"></script>
+
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <h1>Profile</h1>
+    <div class="header">
+        <div class="userPage">
+          <div class="profPic">
+            {% if user.is_profile_pic == True %}
+            <img id="proImg" src="{{user.pic_name}}">
+            <h4 id="editProf">Edit</h4>
+            {% else %}
+            <div class="profile-pic-placeholder">
+              <p>{{user.pic_name}}</p>
+
+            </div>
+            {% endif %}
+
+
+          </div>
+          {% if user.is_profile_pic == True %}
+          <div id="picDiv" style="display:none;">
+            <form class=""  action="/editProfilePicture" enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+              <input type="file" name="myfile">
+              <input type="submit" name="" value="Edit">
+            </form><br>
+
+          </div>
+          {% else %}
+          <!-- <input id="newProf" type="button" name="answer" value="New Profile Picture" /> -->
+            <h4 id="newProf">Add</h4>
+          <div id="picDiv" style="display:none;">
+            <form class=""  action="/newProfilePicture" enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+              <input type="file" name="myfile">
+              <input type="submit" name="" value="Add">
+            </form><br>
+
+          </div>
+          {% endif %}
+          <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
+          <h1 class="user-name">{{ user.gamer_tag}}</h1>
+          <!-- <div class="list-buttons">
+
+            <div class="list" id="list-1">
+              <h3>Followers</h3>
+              <p>{{followers.count}}</p>
+            </div>
+            <div class="list" id="list-2">
+              <h3>Following</h3>
+              <p>{{following.count}}</p>
+            </div>
+            <div class="list" id="list-3">
+              <h3>Reviews</h3>
+              <p>{{length}}</p>
+            </div>
+          </div>
+          <div class="followers">
+          </div> -->
+
+        </div>
+        <div class="profileInfo">
+          {% if profile %}
+          {% for item in profile %}
+          <div class="profileDiv" style="display:none;">
+            <form class="profile-form" action="/editProfile" method="post">
+
+              {% csrf_token %}
+              <!-- <select name="platform">
+                <option value="PC">PC</option>
+                <option value="Playstation">Playstation</option>
+                <option value="Xbox">XBox</option>
+              </select> -->
+              <h4>Choose your favorite platforms:</h4>
+              <label for="platform1">PC</label>
+              <input type="hidden" name="platform1" value="none">
+              <input type="checkbox" name="platform1" value="PC">
+              <label for="platform2">Playstation</label>
+              <input type="hidden" name="platform2" value="none">
+              <input type="checkbox" name="platform2" value="Playstation">
+              <label for="platform3">Xbox</label>
+              <input type="hidden" name="platform3" value="none">
+              <input type="checkbox" name="platform3" value="Xbox"><br><br>
+              <!-- <input type="text" name="platform" value="{{item.platform}}"> -->
+              <h4>Choose your availability:</h4>
+              <label for="ava1">Mornings 6am-12pm</label>
+              <input type="hidden" name="ava1" value="none">
+              <input type="checkbox" name="ava1" value="Mornings 6am-12pm"><br>
+              <label for="ava2">Afternoons 12pm-6pm</label>
+              <input type="hidden" name="ava2" value="none">
+              <input type="checkbox" name="ava2" value="Afternoons 12pm-6pm"><br>
+              <label for="ava3">Nights 6pm-12am+</label>
+              <input type="hidden" name="ava3" value="none">
+              <input type="checkbox" name="ava3" value="Nights 6pm-12am+">
+              <!-- <input type="text" name="availability" value="{{item.availability}}"> -->
+              <h4>Choose your play style:</h4>
+              <select name="gamer_type">
+                <option value="Casual Gamer">Casual Gamer</option>
+                <option value="Looking for some Competition">Looking for some Competition</option>
+                <option value="Serious Gamer">Serious Gamer</option>
+              </select>
+              <!-- <input type="text" name="gamer_type" value="{{item.gamer_type}}"> -->
+              <input id="edit" type="submit" name="" value="Save Changes">
+
+            </form>
+
+          </div>
+          <div class="contact-info">
+
+            <h4>Platform(s):<p>
+              {% if item.platform1 != 'none' %}
+              {{item.platform1}}
+              {% endif %}
+              {% if item.platform2 != 'none' %}
+               {{item.platform2}}
+               {% endif %}
+              {% if item.platform3 != 'none' %}
+               {{item.platform3}}
+               {% endif %}
+            </p></h4>
+            <h4>Availability:<p>
+              {% if item.ava1 != 'none' %}
+              {{item.ava1}}
+              {% endif %}
+              {% if item.ava2 != 'none' %}
+               {{item.ava2}}
+               {% endif %}
+              {% if item.ava3 != 'none' %}
+               {{item.ava3}}
+               {% endif %}
+             </p></h4>
+            <h4>Gamer Type:<p> {{item.gamer_type}}</p></h4>
+
+          </div>
+          <input id="editPro" type="button" name="answer" value="Edit" />
+          {% endfor %}
+          {% else %}
+
+          <div class="profileDiv" style="display:none;">
+            <form class="profile-form" action="/createProfile" method="post">
+
+              {% csrf_token %}
+              <h4>Choose your favorite platforms:</h4>
+              <label for="platform1">PC</label>
+              <input type="hidden" name="platform1" value="none">
+              <input type="checkbox" name="platform1" value="PC">
+              <label for="platform2">Playstation</label>
+              <input type="hidden" name="platform2" value="none">
+              <input type="checkbox" name="platform2" value="Playstation">
+              <label for="platform3">Xbox</label>
+              <input type="hidden" name="platform3" value="none">
+              <input type="checkbox" name="platform3" value="Xbox"><br><br>
+              <!-- <input type="text" name="platform" value="{{item.platform}}"> -->
+              <h4>Choose your availability:</h4>
+              <label for="ava1">Mornings 6am-12pm</label>
+              <input type="hidden" name="ava1" value="none">
+              <input type="checkbox" name="ava1" value="Mornings 6am-12pm"><br>
+              <label for="ava2">Afternoons 12pm-6pm</label>
+              <input type="hidden" name="ava2" value="none">
+              <input type="checkbox" name="ava2" value="Afternoons 12pm-6pm"><br>
+              <label for="ava3">Nights 6pm-12am+</label>
+              <input type="hidden" name="ava3" value="none">
+              <input type="checkbox" name="ava3" value="Nights 6pm-12am+">
+              <!-- <input type="text" name="availability" value="{{item.availability}}"> -->
+              <h4>Choose your play style:</h4>
+              <select name="gamer_type">
+                <option value="Casual Gamer">Casual Gamer</option>
+                <option value="Looking for some Competition">Looking for some Competition</option>
+                <option value="Serious Gamer">Serious Gamer</option>
+              </select>
+              <!-- <input type="text" name="gamer_type" value="" placeholder="Gamer Type"> -->
+              <input id="create" type="submit" name="" value="Create">
+            </form>
+
+          </div>
+          <input id="newPro" type="button" name="answer" value="Create Profile"/>
+
+          {% endif %}
+          {% if uploaded_file_url %}
+            <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+          {% endif %}
+
+        </div>
+        <div class="movieList">
+          <button class='enableOnInput' id="watchlist-button" type="button" value="GameList ({{gamelist.count}})" name="button" disabled="true">GameList ({{gamelist.count}})</button>
+          <div class="watchlist-info" style="display:none">
+            {% for game in gamelist %}
+            <h2>{{ game.name }}</h2>
+            {% endfor %}
+
+          </div>
+
+        </div>
+
+      </div>
+
+  </body>
+</html>
