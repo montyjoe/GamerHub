@@ -115,3 +115,18 @@ class GameList(models.Model):
     name = models.CharField(max_length=200)
     picture_path = models.CharField(max_length=100, blank=True)
     user_id = models.ForeignKey(User, related_name='game')
+    game_id = models.CharField(max_length=100, blank=True)
+
+    @classmethod
+    def add_game(self, data):
+
+        user = User.objects.get(id=data['user_id'])
+
+        my_gamelist = GameList.objects.filter(user_id=user)
+        GameList.objects.create( #<-- add the movie to the watchlist
+        game_id = data['game_id'],
+        name = data['name'],
+        user_id = user,
+        )
+        print "added"
+        return

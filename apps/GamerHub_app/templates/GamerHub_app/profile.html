@@ -195,10 +195,12 @@
 
         </div>
         <div class="movieList">
-          <button class='enableOnInput' id="watchlist-button" type="button" value="GameList ({{gamelist.count}})" name="button" disabled="true">GameList ({{gamelist.count}})</button>
+          <button class='enableOnInput' id="watchlist-button" type="button" value="GameList ({{length}})" name="button" disabled="true">GameList ({{length}})</button>
           <div class="watchlist-info" style="display:none">
             {% for game in gamelist %}
             <h2>{{ game.name }}</h2>
+            <img src="{{game.picture_path}}" alt="">
+            <a href="/delete/{{game.id}}">Remove</a>
             {% endfor %}
 
           </div>

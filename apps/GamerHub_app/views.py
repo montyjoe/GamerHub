@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from datetime import datetime, timedelta
 import math
+from . import services
 from django.http import JsonResponse
 import json
 import requests
@@ -50,10 +51,20 @@ def profile(request):
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
     user_profile = profileFormat(users)
     gamelist = GameList.objects.filter(user_id=request.session["user"])
+    new_games = []
+    for game in gamelist:
+        if game.picture_path[:4] == '&url=':
+            game.picture_path = game.picture_path[5:]
+            new_games.append(game)
+        else:
+            new_games.append(game)
+        print game.picture_path
+    length = len(new_games)
     context = {
         'user': user_profile,
         'profile': profile,
-        'gamelist': gamelist
+        'gamelist': new_games,
+        'length' : length,
     }
     return render(request, 'GamerHub_app/profile.html', context)
 
@@ -169,6 +180,27 @@ def register_account(request): #this function creates the account
             request.session['user'] = user_id
             request.session['action'] = "registered"
             return redirect('/')
+
+def search(request):
+    search = request.GET.get('search-info')
+    result = services.search_database(search)
+    return JsonResponse(result, safe=False)
+
+def addGame(request, id, name):
+    data = {
+    'name': name,
+    'game_id': id,
+    'user_id': request.session['user']
+    }
+    GameList.add_game(data)
+    return redirect('/')
+    # result = {"added": True}
+    # return JsonResponse(result, safe=False)
+
+def deleteGame(request, id):
+    delete_me = GameList.objects.get(id=id)
+    delete_me.delete()
+    return redirect("/profile")
 
 def searchGame(request):
     print("true")
