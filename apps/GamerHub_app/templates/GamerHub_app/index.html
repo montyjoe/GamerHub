@@ -3,7 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Home</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
     {% load static %}
+
+    <link rel="stylesheet" href="{% static 'GamerHub_app/css/index.css'%}"/>
+
+    <script type="text/javascript" src="{% static 'GamerHub_app/js/index.js'%}"></script>
+
     <!-- <link href="{% static 'css/GamerHub.css' %}" rel="stylesheet"> -->
 
   </head>
@@ -23,5 +31,16 @@
           <button type="submit" name="button">Search</button>
         </form>
       </div>
+      <h2>>>>>>>>>>>>>>>>>>></h2>
+      <div class="search-div">
+          <form class="search-form" name="search-form"action="/search/" method="POST">
+              {% csrf_token %}
+              <input type="input" name="search-info" id="search-info" placeholder="Search" autocomplete="off">
+          </form>
+          <div class="search-result-block">
+                  <div id="search-results"> </div>
+          </div>
+      </div>
+
   </body>
 </html>
