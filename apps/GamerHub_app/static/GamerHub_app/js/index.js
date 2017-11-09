@@ -89,7 +89,7 @@ function jsonTaken(json){
     // var type = json[i].type
     console.log(id);
     console.log(img_url);
-    $("#search-results").append('<a class="search-tag" href="/movie/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + name + '</h3> </div> <a href="/addGame/' + id +'/'+ name + '" class="movie-type type">Add to GameList</a> </div> </a>');
+    $("#search-results").append('<a class="search-tag" href="/game/' + id + '"><div class="result-search center"><img class ="search-result-icon" src="'+ img_url +'""> <div class="title-holder"><h3 class="search-result-title">' + name + '</h3> </div> <a href="/addGame/' + id +'/'+ name + '" class="movie-type type">Add to GameList</a> </div> </a>');
     // if (type == 'movie'){
     // }
     // else if (type == 'tv') {

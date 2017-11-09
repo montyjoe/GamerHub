@@ -23,14 +23,6 @@
     <h1>GamerHub</h1>
     <h2>Welcome, {{user.gamer_tag}}</h2>
     {% endfor %}
-    <div class="searchGames">
-        <form class="" action="/searchGame" method="POST">
-          {% csrf_token %}
-          Search games:
-          <input name="game">
-          <button type="submit" name="button">Search</button>
-        </form>
-      </div>
       <h2>>>>>>>>>>>>>>>>>>></h2>
       <div class="search-div">
           <form class="search-form" name="search-form"action="/search/" method="POST">
@@ -38,8 +30,16 @@
               <input type="input" name="search-info" id="search-info" placeholder="Search" autocomplete="off">
           </form>
           <div class="search-result-block">
-                  <div id="search-results"> </div>
+              <div id="search-results"> </div>
           </div>
+      </div>
+      <h2>>>>>>>>>>>>>>>>>>></h2>
+      <div class="top-games">
+        <h3>Top Games</h3>
+      </div>
+      <h2>>>>>>>>>>>>>>>>>>></h2>
+      <div class="fav-games">
+        <h3>My Favorite Games</h3>
       </div>
 
   </body>

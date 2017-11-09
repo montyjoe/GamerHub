@@ -12,7 +12,6 @@ urlpatterns = [
     url(r'^editProfile$', views.editProfile),
     url(r'^newProfilePicture$', views.newProfilePicture),
     url(r'^editProfilePicture$', views.editProfilePicture),
-    url(r'^searchGame$', views.searchGame),
     url(r'^search/$', views.search),
     url(r'^addGame/(?P<id>\d+)/(?P<name>[\w|\W]+)$', views.addGame),
     url(r'^delete/(?P<id>\d+)$', views.deleteGame),

@@ -186,13 +186,9 @@ def search(request):
     result = services.search_database(search)
     return JsonResponse(result, safe=False)
 
-def addGame(request, id, name):
-    data = {
-    'name': name,
-    'game_id': id,
-    'user_id': request.session['user']
-    }
-    GameList.add_game(data)
+def addGame(request, id):
+    result = services.add_game(id)
+    GameList.add_game(result)
     return redirect('/')
     # result = {"added": True}
     # return JsonResponse(result, safe=False)
@@ -202,25 +198,9 @@ def deleteGame(request, id):
     delete_me.delete()
     return redirect("/profile")
 
-def searchGame(request):
-    print("true")
-    headers={'Accept': 'application/vnd.twitchtv.v5+json', 'Client-ID': '2w5qsci3na5nzblfr60mcgju4g9zi9'}
-    game = 'https://api.twitch.tv/kraken/search/games?query='+request.POST['game']
-    r = requests.get(game, headers=headers)
-    json_data = r.json()
-    print(json_data)
-    results = json_data['games']
-    gameArr = []
-    for game in results:
-        game_json = {}
-        game_json['id'] = game['giantbomb_id']
-        game_json['label'] = game['name']
-        game_json['cover'] = game['box']['large']
-        gameArr.append(game_json)
-    data = {
-        'gameInfo':gameArr
-    }
-    return render(request, 'GamerHub_app/search.html', data)
+
+# def topGames(request):
+
 
 
 

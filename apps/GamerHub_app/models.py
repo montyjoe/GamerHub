@@ -123,9 +123,10 @@ class GameList(models.Model):
         user = User.objects.get(id=data['user_id'])
 
         my_gamelist = GameList.objects.filter(user_id=user)
-        GameList.objects.create( #<-- add the movie to the watchlist
+        GameList.objects.create( #<-- add the game to the playlist
         game_id = data['game_id'],
         name = data['name'],
+        picture_path = data['cover_img'],
         user_id = user,
         )
         print "added"
